@@ -1,0 +1,85 @@
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+
+        jQuery('#PbrfClose').click(function() {
+            jQuery('#PbrfMessage').fadeOut(); 
+            
+        });
+    });
+</script>
+
+<div id="block_Pbrf" >
+    <a id="PbrfClose" href="#" class="close-button">X</a>
+
+    <h4><span id=span_pbrf></span> Выберите бланк для заполнения (откроется новая вкладка)</h4>
+    Сумма наложенного платежа:<input style="width:50px;height: 20px;display:inline-block" type="text" name="nalojka" id="nalojka" value="0"/>
+    &nbsp;Сумма ценности:<input style="width:50px;height: 20px;display:inline-block" type="text" name="cen" id="cen"  value="0"/>
+    <div id="pdf_html_block" class="twelve columns">
+        <div class="ro">
+            <div class="thumb_img "  onclick="pbrf_ajax('113');">
+                <div class="thumb_border">
+                    <div class="img">
+                        <img rel="0" src="/modules/blockpbrf/views/images/f112.jpg">
+                    </div>
+                    <div class="thumb_title">
+                        Ф. 112 бланк почтового перевода
+                    </div>
+                </div>
+            </div>
+            <div class="thumb_img" onclick="pbrf_ajax('107');">
+                <div class="thumb_border">
+                    <div class="img">
+                        <img rel="6" src="/modules/blockpbrf/views/images/107.jpg">
+                    </div>
+                    <div class="thumb_title">
+                        Ф107 бланк Опись
+                    </div>
+                </div>
+            </div>
+            <div class="thumb_img" onclick="pbrf_ajax('116');">
+                <div class="thumb_border">
+                    <div class="img">
+                        <img rel="6" src="/modules/blockpbrf/views/images/f116.jpg">
+                    </div>
+                    <div class="thumb_title">
+                        Ф116 бланка сопроводительного адреса к посылке
+                    </div>
+                </div>
+            </div>
+            <div class="thumb_img"  onclick="pbrf_ajax('7a');">
+                <div class="thumb_border">
+                    <div class="img">
+                        <img rel="7" src="/modules/blockpbrf/views/images/f7a.jpg">
+                    </div>
+                    <div class="thumb_title">
+                        Ф.7 бланка адресного ярлыка к отправлению 1-го класса
+                    </div>
+                </div>
+            </div>
+            <div class="thumb_img"  onclick="pbrf_ajax('7b');">
+                <div class="thumb_border">
+                    <div class="img">
+                        <img rel="7" src="/modules/blockpbrf/views/images/f7b.jpg">
+                    </div>
+                    <div class="thumb_title">
+                        Ф.7 бланка адресного ярлыка к бандероли
+                    </div>
+                </div>
+            </div>
+            <div class="thumb_img"  onclick="pbrf_ajax('7p');">
+                <div class="thumb_border">
+                    <div class="img">
+                        <img rel="7" src="/modules/blockpbrf/views/images/f7p.jpg">
+                    </div>
+                    <div class="thumb_title">
+                        Ф.7 бланка адресного ярлыка к посылке
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div><input type="hidden" name="pbrf_order_id" id="pbrf_order_id" value="">
+</div>
