@@ -49,11 +49,11 @@ $date->params->bank_name = Configuration::get('PS_BLOCK_PBRF_BANK_NAME');
 $date->params->current = Configuration::get('PS_BLOCK_PBRF_CURRENT');
 $date->params->bik = Configuration::get('PS_BLOCK_PBRF_BIK');
 $date->params->naim = Configuration::get('PS_BLOCK_PBRF_NAIM');
+$date->params->barcode = Configuration::get('PS_BLOCK_PBRF_BARCODE');
+$date->params->to_type = Configuration::get('PS_BLOCK_PBRF_TO_TYPE');
+$date->params->to_phone = Configuration::get('PS_BLOCK_PBRF_TO_PHONE');
 $date->params->nalojka = Tools::getValue("nalojka", '');
 $date->params->cen = Tools::getValue("cen", '');
-
-
-
 
 switch ($blank) {
     case ('7a'): $result = print_f7('a', $date);
@@ -63,6 +63,8 @@ switch ($blank) {
     case ('7p'): $result = print_f7('p', $date);
         break;
     case ('113'): $result = print_f112($date);
+        break;
+     case ('112f'): $result = print_f112f($date);
         break;
     case ('116'): $result = print_f116($date);
         break;
@@ -146,6 +148,64 @@ function print_f112($d) {
     $data['document_year'] = $d->params->document_year;
     $data['document_issued_by'] = $d->params->document_issued_by;
     $data['message_part1'] = $d->params->message_part1;
+    return responce($data, $key, $url);
+}
+
+function print_f112f($d) {
+
+    $url = 'http://pbrf.ru/pdf.F112EK';
+    $key = $d->params->key;
+    $data = array();
+    $data['to_name'] = $d->params->l_name . ' ' . $d->params->f_name . ' ' . $d->params->m_name;
+    $data['to_type'] = $d->params->to_type;
+    $data['to_phone'] = $d->params->to_phone;
+    $data['to_zip'] = $d->params->from_zip;
+    //if (!empty($order->d_l_name))
+    //$data['from_name'] = $order->d_f_name . ' ' . $order->d_m_name;
+    //else
+    $data['from_name'] = $d->address['firstname'];
+    //if (!empty($order->d_l_name))
+    //$data['from_surname'] = $order->d_l_name;
+    //else
+    $data['from_surname'] = $d->address['lastname'];
+    //if (!empty($order->d_city))
+    //$data['from_city'] = $order->d_city;
+    //else
+    $data['from_city'] = $d->address['city'];
+    //if (!empty($order->d_state))
+    //$data['from_region'] = $order->d_state;
+    //else
+    $data['from_region'] = $d->address['country'];
+    $data['from_region'] = $d->address['state'];
+    //if (!empty($order->d_street))
+    //$data['from_street'] = $order->d_street;
+    //else
+    $data['from_street'] = $d->address['address1'];
+    //if (!empty($order->d_home))
+    //$data['from_build'] = $order->d_home;
+    //else
+    $data['from_build'] = $d->address['address2'];
+    //if (!empty($order->d_apartment))
+    //$data['from_appartment'] = $order->d_apartment;
+    //else
+    //$data['from_appartment'] = $order->apartment;
+    //if (!empty($order->d_zip))
+    //$data['from_zip'] = $order->d_zip;
+    //else
+    $data['from_zip'] = $d->address['postcode'];
+
+
+    $data['barcode'] = $d->params->barcode;
+    if(round($d->params->nalojka, 2)>0){
+        $data['sum_num'] = round($d->params->nalojka, 2);
+        $data['cod'] =1;
+    }else{
+        $data['sum_num'] = round($d->params->cen, 2);
+        $data['cod'] =0;
+        
+    }
+    
+    $data['message'] = $d->params->message_part1;
     return responce($data, $key, $url);
 }
 

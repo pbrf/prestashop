@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <module>
 	<name>blockpbrf</name>
-	<displayName><![CDATA[Модуль PBRF.RU]]></displayName>
+	<displayName><![CDATA[Модуль PBRF.ru]]></displayName>
 	<version><![CDATA[1.0.0]]></version>
-	<description><![CDATA[Печать форм Почты России через сервис PBRF.RU]]></description>
+	<description><![CDATA[Печать форм Почты России через сервис PBRF.ru]]></description>
 	<author><![CDATA[pbrf.ru]]></author>
 	<tab><![CDATA[other]]></tab>
 	<is_configurable>1</is_configurable>

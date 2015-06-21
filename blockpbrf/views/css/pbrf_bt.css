@@ -1,5 +1,5 @@
 .pbrf_button{border:none;background-image:url("../images/russianpost.jpg")!important; cursor: pointer;width:29px!important;height:29px!important;}
-#PbrfMessage,#PbrfResponce {border-radius: 5px;overflow: hidden;background: none repeat scroll 0 0 #FFFFFF;box-shadow: 0 0 1em rgba(0, 0, 0, 0.5);color: #666666;bottom: 0;display: none;height: 560px;left: 0;margin: auto;padding: 8px 8px 8px 10px;position: fixed;right: 0;top: 0;width: 814px;z-index: 9999;    }
+#PbrfMessage,#PbrfResponce {border-radius: 5px;overflow: hidden;background: none repeat scroll 0 0 #FFFFFF;box-shadow: 0 0 1em rgba(0, 0, 0, 0.5);color: #666666;bottom: 0;display: none;height: 560px;left: 0;margin: auto;padding: 8px 8px 8px 10px;position: fixed;right: 0;top: 0;width: 1080px;z-index: 9999;    }
 #PbrfClose{color: #6FA5FD;cursor: pointer;display: block;font-size: 14px;font-weight: 700;line-height: 14px;position: absolute;right: 6px;top: 4px;}
 #block_Pbrf {margin: 0;font-size: 12px;text-align: justify;}
 .column, .columns {

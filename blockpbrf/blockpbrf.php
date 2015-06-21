@@ -13,7 +13,7 @@ class BlockPbrf extends Module {
         $this->name = 'blockpbrf';
         $this->tab = 'other';
         $this->version = '1.0.0';
-        $this->author = 'Beagler.ru';
+        $this->author = 'pbrf.ru';
         $this->module_key = "";
         $this->bootstrap = true;
         parent::__construct();
@@ -66,8 +66,9 @@ class BlockPbrf extends Module {
         if ($this->context->controller->controller_name != 'AdminOrders') {
             return;
         }
+        $suf='';
         if (isset($_REQUEST['id_order'])) {
-            return;
+            $suf='_one';
         }
         if (method_exists($this->context->controller, 'addJquery')) {
             $this->context->controller->addJquery();
@@ -77,19 +78,19 @@ class BlockPbrf extends Module {
             if (method_exists($this->context->controller, 'addCss')) {
                 $this->context->controller->addCss($this->_path . 'views/css/pbrf_bt.css');
             }
-			if (method_exists($this->context->controller, 'addJs')) {
-				$this->context->controller->addJs($this->_path . 'views/js/pbrf_bt.js', 'all');
-			}
+            if (method_exists($this->context->controller, 'addJs')) {
+                $this->context->controller->addJs($this->_path . 'views/js/pbrf_bt'.$suf.'.js', 'all');
+            }
         } else {
             if (method_exists($this->context->controller, 'addCss')) {
                 $this->context->controller->addCss($this->_path . 'views/css/pbrf.css');
             }
-			if (method_exists($this->context->controller, 'addJs')) {
-				$this->context->controller->addJs($this->_path . 'views/js/pbrf.js', 'all');
-			}
+            if (method_exists($this->context->controller, 'addJs')) {
+                $this->context->controller->addJs($this->_path . 'views/js/pbrf'.$suf.'.js', 'all');
+            }
         }
 
-        
+
         return;
     }
 
@@ -122,6 +123,9 @@ class BlockPbrf extends Module {
             Configuration::updateValue('PS_BLOCK_PBRF_CURRENT', Tools::getValue('current'));
             Configuration::updateValue('PS_BLOCK_PBRF_BIK', Tools::getValue('bik'));
             Configuration::updateValue('PS_BLOCK_PBRF_NAIM', Tools::getValue('naim'));
+            Configuration::updateValue('PS_BLOCK_PBRF_BARCODE', Tools::getValue('barcode'));
+            Configuration::updateValue('PS_BLOCK_PBRF_TO_TYPE', Tools::getValue('to_type'));
+            Configuration::updateValue('PS_BLOCK_PBRF_TO_PHONE', Tools::getValue('to_phone'));
             $output .= $this->displayConfirmation($this->l('Settings updated'));
         }
         return $output . $this->displayForm();
@@ -137,8 +141,6 @@ class BlockPbrf extends Module {
                 'title' => $this->l('Settings'),
             ),
             'description' => $this->l('This block print forms Russian Post from service PBRF.ru.') . '<br/><br/>' .
-            $this->l('For work save license key from beagler.ru') . '<br/>' .
-            $this->l('Sign up for PBRF.ru a promotional code') . '<br/>' .
             $this->l('And receive a key in a private office and save this') . '<br/><br/>',
             'input' => array(
                 array(
@@ -315,6 +317,27 @@ class BlockPbrf extends Module {
                     'name' => 'naim',
                     'size' => 40,
                     'required' => false
+                ),
+                array(
+                    'type' => 'text',
+                    'label' => $this->l('Barcode'),
+                    'name' => 'barcode',
+                    'size' => 40,
+                    'required' => false
+                ),
+                array(
+                    'type' => 'text',
+                    'label' => $this->l('To_type'),
+                    'name' => 'to_type',
+                    'size' => 40,
+                    'required' => false
+                ),
+                array(
+                    'type' => 'text',
+                    'label' => $this->l('To_phone'),
+                    'name' => 'to_phone',
+                    'size' => 40,
+                    'required' => false
                 )
             ),
             'submit' => array(
@@ -379,6 +402,11 @@ class BlockPbrf extends Module {
         $helper->fields_value['current'] = Configuration::get('PS_BLOCK_PBRF_CURRENT');
         $helper->fields_value['bik'] = Configuration::get('PS_BLOCK_PBRF_BIK');
         $helper->fields_value['naim'] = Configuration::get('PS_BLOCK_PBRF_NAIM');
+        $helper->fields_value['barcode'] = Configuration::get('PS_BLOCK_PBRF_BARCODE');
+        $helper->fields_value['to_type'] = Configuration::get('PS_BLOCK_PBRF_TO_TYPE');
+        $helper->fields_value['to_phone'] = Configuration::get('PS_BLOCK_PBRF_TO_PHONE');
+        
+     
         return $helper->generateForm($fields_form);
     }
 
