@@ -234,7 +234,22 @@ function print_f107($d) {
 }
 
 function print_adr($d) {
-    global $paramsplug, $order;
+    $url = 'http://pbrf.ru/pdf.PrintAddress';
+    $key = $d->params->key;
+    $data = array();
+    $data['from_name'] = $d->params->f_name . ' ' . $d->params->m_name;
+    $data['from_city'] = $d->params->from_city;
+    $data['from_street'] = $d->params->from_street;
+    $data['from_build'] = $d->params->from_build;
+    $data['from_appartment'] = $d->params->from_appartment;
+    $data['from_zip'] = $d->params->from_zip;
+    $data['from_address'] = $data['from_city'].', '.$data['from_city'].', '.$data['from_street'].' '.$data['from_appartment'].', '.$data['from_zip'];
+    $data['count_copy'] = 21;
+
+    $data['whom_country'] = $d->address['country'] . ' ' . $d->address['state'];
+    $data['whom_city'] = $d->address['city'] . ', ' . $d->address['address1'] . $d->address['address2'];
+    $data['to'] = array(0=>array('to_name'=> $d->address['firstname'].' '.$d->address['firstname'], 'to_adress' => $data['whom_country'].' '.$data['whom_city'], 'to_zip'=>$d->address['postcode']));
+    return responce($data, $key, $url);
 }
 
 function print_f7($b, $d) {
